@@ -36,8 +36,10 @@ async def on_message(message):
     is_2f_cardkey_channel = (message.channel.id == card_2f_channel_id)
     role = message.guild.get_role(card_role_id)
 
-    takelike_words = {"take", "ｔａｋｅ", "たけ", "タケ", "ﾀｹ", "rake", "竹", "ていく", "テイク", "ﾃｲｸ", "teiku", "ｔｅｉｋｕ"}
-    returnlike_words = {"return", "ｒｅｔｕｒｎ", "れつrn", "れつｒｎ", "teturn", "returm", "リターン", "りたーん", "ﾘﾀｰﾝ", "列rn"}
+    takelike_words = {"take", "ｔａｋｅ", "たけ", "タケ", "ﾀｹ", "rake", "竹", 
+                        "ていく", "テイク", "ﾃｲｸ", "teiku", "ｔｅｉｋｕ"}
+    returnlike_words = {"return", "ｒｅｔｕｒｎ", "れつrn", "れつｒｎ", "teturn", 
+                        "returm", "リターン", "りたーん", "ﾘﾀｰﾝ", "列rn"}
     helplike_words = {"help", "ｈｅｌｐ", "へlp", "ヘｌｐ", "へるぷ", "ヘルプ", "たすけて", "ﾍﾙﾌﾟ", "助けて", "ﾀｽｹﾃ", 
                         "タスケテ", "ﾍlp", "hwkp", "hekp", "jelp", "felp", "gelp", "tasukete", "ｔａｓｕｋｅｔｅ", "本当に助けてください"}
 
