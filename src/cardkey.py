@@ -22,6 +22,11 @@ card_can_take = True
 @client.event
 async def on_ready():
     print(f"カードキーちゃん が起動しました")
+    global card_can_take
+    for guild in client.guilds:
+        for role in guild.roles:
+            if (role.id == card_role_id) and not (role.members == []):
+                card_can_take = False
 
 @client.event
 async def on_message(message):
@@ -34,9 +39,9 @@ async def on_message(message):
     takelike_words = {"take", "ｔａｋｅ", "たけ", "タケ", "ﾀｹ", "rake", "竹", "ていく", "テイク", "ﾃｲｸ", "teiku", "ｔｅｉｋｕ"}
     returnlike_words = {"return", "ｒｅｔｕｒｎ", "れつrn", "れつｒｎ", "teturn", "returm", "リターン", "りたーん", "ﾘﾀｰﾝ", "列rn"}
     helplike_words = {"help", "ｈｅｌｐ", "へlp", "ヘｌｐ", "へるぷ", "ヘルプ", "たすけて", "ﾍﾙﾌﾟ", "助けて", "ﾀｽｹﾃ", 
-                        "タスケテ", "ﾍlp", "hwkp", "hekp", "jelp", "felp", "gelp"}
+                        "タスケテ", "ﾍlp", "hwkp", "hekp", "jelp", "felp", "gelp", "tasukete", "ｔａｓｕｋｅｔｅ", "本当に助けてください"}
 
-    if (is_bot_channel):
+    if (is_bot_channel) or (is_2f_cardkey_channel):
         user_said = message.content.lower()
         if (message.author.bot):
             return
@@ -52,7 +57,6 @@ async def on_message(message):
             elif (card_can_take == False):
                 role_member = role.members[0].id
                 await message.channel.send(f"**カードは<@{role_member}> が装備中です!**")
-
 
         if (user_said in returnlike_words):
             if (card_can_take == True):
