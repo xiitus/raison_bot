@@ -21,7 +21,7 @@ card_can_take = True
 
 @client.event
 async def on_ready():
-    print(f"Cardey が起動しました")
+    print(f"カードキーちゃん が起動しました")
 
 @client.event
 async def on_message(message):
@@ -42,7 +42,7 @@ async def on_message(message):
             return
 
         if (user_said in helplike_words):
-            await message.channel.send(f"***help***     コマンド -> このメッセージ(**self, this**)を表示\n***take***     コマンド -> カードキーを所持していることを示すロールを付与\n***return*** コマンド -> カードキー返却時に、takeコマンドで付与したロールを剥奪")
+            await message.channel.send(f"***help***      -> このヘルプメッセージを表示\n***take***      -> カードキーを所持していることを示すロールを付与\n***return***  -> カードキー返却時に、takeコマンドで付与したロールを剥奪")
 
         if (user_said in takelike_words):
             if (card_can_take == True):
