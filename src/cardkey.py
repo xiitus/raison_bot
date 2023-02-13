@@ -54,18 +54,18 @@ async def on_message(message):
         if (user_said in takelike_words) or (user_said[:-1] in takelike_words):
             if (card_can_take == True):
                 card_can_take = False
-                await message.channel.send(f"**<@{message.author.id}> がカードキーを装備しました!**")
+                await message.channel.send(f"**<@{message.author.id}> がカードキーを装備!**")
                 await message.author.add_roles(role)
             elif (card_can_take == False):
                 role_member = role.members[0].id
-                await message.channel.send(f"**カードは<@{role_member}> が装備中です!**")
+                await message.channel.send(f"**カードは現在 <@{role_member}> が装備中!**")
 
         if (user_said in returnlike_words) or (user_said[:-1] in returnlike_words):
             if (card_can_take == True):
                 await message.channel.send(f"**カードはまだ 2F にあります!**")
             elif (card_can_take == False):
                 card_can_take = True
-                await message.channel.send(f"**<@{message.author.id}> がカードキーを返却しました!**")
+                await message.channel.send(f"**<@{message.author.id}> がカードキーを返却!**")
                 await message.author.remove_roles(role)
 
 client.run(token)
