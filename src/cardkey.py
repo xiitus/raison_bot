@@ -37,7 +37,7 @@ async def on_message(message):
     role = message.guild.get_role(card_role_id)
 
     takelike_words = {"take", "ｔａｋｅ", "たけ", "タケ", "ﾀｹ", "rake", "竹", 
-                        "ていく", "テイク", "ﾃｲｸ", "teiku", "ｔｅｉｋｕ"}
+                        "ていく", "テイク", "ﾃｲｸ", "teiku", "ｔｅｉｋｕ", "て行く"}
     returnlike_words = {"return", "ｒｅｔｕｒｎ", "れつrn", "れつｒｎ", "teturn", 
                         "returm", "リターン", "りたーん", "ﾘﾀｰﾝ", "列rn"}
     helplike_words = {"help", "ｈｅｌｐ", "へlp", "ヘｌｐ", "へるぷ", "ヘルプ", "たすけて", "ﾍﾙﾌﾟ", "助けて", "ﾀｽｹﾃ", 
