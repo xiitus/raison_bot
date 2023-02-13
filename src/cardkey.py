@@ -48,10 +48,10 @@ async def on_message(message):
         if (message.author.bot):
             return
 
-        if (user_said in helplike_words):
+        if (user_said in helplike_words) or (user_said[:-1] in helplike_words):
             await message.channel.send(f"***help***      -> このヘルプメッセージを表示\n***take***      -> カードキーを所持していることを示すロールを付与\n***return***  -> カードキー返却時に、takeコマンドで付与したロールを剥奪")
 
-        if (user_said in takelike_words):
+        if (user_said in takelike_words) or (user_said[:-1] in takelike_words):
             if (card_can_take == True):
                 card_can_take = False
                 await message.channel.send(f"**<@{message.author.id}> がカードキーを装備しました!**")
@@ -60,7 +60,7 @@ async def on_message(message):
                 role_member = role.members[0].id
                 await message.channel.send(f"**カードは<@{role_member}> が装備中です!**")
 
-        if (user_said in returnlike_words):
+        if (user_said in returnlike_words) or (user_said[:-1] in returnlike_words):
             if (card_can_take == True):
                 await message.channel.send(f"**カードはまだ 2F にあります!**")
             elif (card_can_take == False):
