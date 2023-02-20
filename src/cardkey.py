@@ -35,8 +35,8 @@ async def on_ready():
 
 @client.event
 async def on_member_join(member):
-    role = member.guild.get_role(trial_joining_role_id)
-    await member.add_roles(role)
+    trial_joining_role = member.guild.get_role(trial_joining_role_id)
+    await member.add_roles(trial_joining_role)
     
 
 @client.event
