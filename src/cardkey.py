@@ -13,6 +13,7 @@ attendance_channel_id = int(os.environ["ATTENDANCE_CHANNEL_ID"])
 
 in_role_id = int(os.environ["IN_ROLE_ID"])
 card_2f_role_id = int(os.environ["CARD_2F_ROLE_ID"])
+trial_joining_role_id = int(os.environ["TRIAL_JOINING_ROLE_ID"])
 
 intents = Intents.default()
 intents.members = True
@@ -31,6 +32,11 @@ async def on_ready():
         for role in guild.roles:
             if (role.id == card_2f_role_id) and not (role.members == []):
                 card_can_take = False
+
+@client.event
+async def on_member_join(member):
+    await member.add_roles(trial_joining_role_id)
+    
 
 @client.event
 async def on_message(message):
