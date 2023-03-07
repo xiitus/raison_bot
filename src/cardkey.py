@@ -216,6 +216,7 @@ async def on_message(message):
                         "returm", "リターン", "りたーん", "ﾘﾀｰﾝ", "列rn", "retrun", "retrn"}
     
     if (is_bot_channel): 
+        await message.delete()
         if (message.author.bot):
             return
 
