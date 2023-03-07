@@ -214,6 +214,8 @@ async def on_message(message):
                         "ていく", "テイク", "ﾃｲｸ", "teiku", "ｔｅｉｋｕ", "て行く", "てうく"}
     returnlike_words = {"return", "ｒｅｔｕｒｎ", "れつrn", "れつｒｎ", "teturn", "retune",
                         "returm", "リターン", "りたーん", "ﾘﾀｰﾝ", "列rn", "retrun", "retrn"}
+
+    user_said = message.content.lower()
     
     if (is_bot_channel): 
         await message.delete()
@@ -226,8 +228,6 @@ async def on_message(message):
     if (is_bot_channel) or (is_attendance_channel):
         if (message.author.bot):
             return
-
-        user_said = message.content.lower()
 
         if (user_said in inlike_words) or (user_said[:-1] in inlike_words):
             await message.channel.send(office_in(message, message.author.id))
