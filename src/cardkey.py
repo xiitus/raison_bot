@@ -32,8 +32,7 @@ def json_to_dict(path):
         df = json.load(f)
     return (df)
 
-member_data = json_to_dict(
-    "https://dolpxx.github.io/cardkey_bot/src/sample.json")
+member_data = json_to_dict("../sample.json")
 print(member_data)
 
 def initialize_data(ID):
