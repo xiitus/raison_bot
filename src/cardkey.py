@@ -7,15 +7,15 @@ from discord import Intents, Client
 load_dotenv()
 
 token = (os.environ["CARD_BOT_TOKEN"])
-guild_id = (os.environ["GUILD_ID"])
+guild_id = int(os.environ["GUILD_ID"])
 
-bot_channel_id = (os.environ["BOT_CHANNEL_ID"])
+bot_channel_id = int(os.environ["BOT_CHANNEL_ID"])
 card_2f_channel_id = (os.environ["CARD_2F_CHANNEL_ID"])
-attendance_channel_id = (os.environ["ATTENDANCE_CHANNEL_ID"])
+attendance_channel_id = int(os.environ["ATTENDANCE_CHANNEL_ID"])
 
-in_role_id = (os.environ["IN_ROLE_ID"])
-card_2f_role_id = (os.environ["CARD_2F_ROLE_ID"])
-trial_joining_role_id = (os.environ["TRIAL_JOINING_ROLE_ID"])
+in_role_id = int(os.environ["IN_ROLE_ID"])
+card_2f_role_id = int(os.environ["CARD_2F_ROLE_ID"])
+trial_joining_role_id = int(os.environ["TRIAL_JOINING_ROLE_ID"])
 
 intents = Intents.default()
 intents.members = True
