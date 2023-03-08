@@ -68,9 +68,11 @@ async def on_message(message):
         user_said = message.content.lower()
 
         if (user_said in inlike_words) or (user_said[:-1] in inlike_words):
+            print("add in")
             await message.author.add_roles(in_role)
 
         if (user_said in outlike_words) or (user_said[:-1] in outlike_words):
+            print("remove in")
             await message.author.remove_roles(in_role)
         return
 
@@ -81,11 +83,13 @@ async def on_message(message):
         user_said = message.content.lower()
 
         if (user_said in helplike_words) or (user_said[:-1] in helplike_words):
+            print("help")
             await message.channel.send(f"***help***      -> このヘルプメッセージを表示\n***take***      -> カードキーを所持していることを示すロールを付与\n***return***  -> カードキー返却時に、takeコマンドで付与したロールを剥奪")
 
         if (user_said in takelike_words) or (user_said[:-1] in takelike_words):
             if (card_can_take == True):
                 card_can_take = False
+                print("add card")
                 await message.channel.send(f"**<@{message.author.id}> がカードキーを装備!**")
                 await message.author.add_roles(card_2f_role)
             elif (card_can_take == False):
@@ -97,6 +101,7 @@ async def on_message(message):
                 await message.channel.send(f"**カードはまだ 2F にあります!**")
             elif (card_can_take == False):
                 card_can_take = True
+                print("remove card")
                 await message.channel.send(f"**<@{message.author.id}> がカードキーを返却!**")
                 await message.author.remove_roles(card_2f_role)
         return
