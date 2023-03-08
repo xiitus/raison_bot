@@ -241,7 +241,7 @@ async def on_message(message):
             await message.author.remove_roles(in_role)
         return
 
-    if (is_bot_channel) or (is_2f_cardkey_channel):
+    if (is_2f_cardkey_channel) or (is_bot_channel):
         if (message.author.bot):
             return
 
