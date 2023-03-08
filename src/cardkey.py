@@ -231,13 +231,13 @@ async def on_message(message):
             return
 
         if (user_said in inlike_words) or (user_said[:-1] in inlike_words):
-            await message.delete()
-            await message.channel.send(office_in(message, message.author.id))
+            # await message.delete()
+            # await message.channel.send(office_in(message, message.author.id))
             await message.author.add_roles(in_role)
 
         if (user_said in outlike_words) or (user_said[:-1] in outlike_words):
-            await message.delete()
-            await message.channel.send(office_out(message, message.author.id))
+            # await message.delete()
+            # await message.channel.send(office_out(message, message.author.id))
             await message.author.remove_roles(in_role)
         return
 
@@ -250,7 +250,7 @@ async def on_message(message):
         if (user_said in takelike_words) or (user_said[:-1] in takelike_words):
             if (card_can_take == True):
                 card_can_take = False
-                await message.delete()
+                # await message.delete()
                 await message.channel.send(f"**<@{message.author.id}> がカードキーを装備!**")
                 await message.author.add_roles(card_2f_role)
             elif (card_can_take == False):
@@ -259,11 +259,11 @@ async def on_message(message):
 
         if (user_said in returnlike_words) or (user_said[:-1] in returnlike_words):
             if (card_can_take == True):
-                await message.delete()
+                # await message.delete()
                 await message.channel.send(f"**カードはまだ 2F にあります!**")
             elif (card_can_take == False):
                 card_can_take = True
-                await message.delete()
+                # await message.delete()
                 await message.channel.send(f"**<@{message.author.id}> がカードキーを返却!**")
                 await message.author.remove_roles(card_2f_role)
         return
