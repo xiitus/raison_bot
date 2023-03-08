@@ -77,6 +77,7 @@ async def on_message(message):
         return
 
     if (is_bot_channel) or (is_2f_cardkey_channel):
+        print("help/take/return")
         if (message.author.bot):
             return
 
