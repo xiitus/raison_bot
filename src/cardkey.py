@@ -61,7 +61,7 @@ async def on_message(message):
     helplike_words = {"help", "ｈｅｌｐ", "へlp", "ヘｌｐ", "へるぷ", "ヘルプ", "たすけて", "ﾍﾙﾌﾟ", "助けて", "ﾀｽｹﾃ", 
                         "タスケテ", "ﾍlp", "hwkp", "hekp", "jelp", "felp", "gelp", "tasukete", "ｔａｓｕｋｅｔｅ", "本当に助けてください"}
     
-    if (is_bot_channel) or (is_attendance_channel):
+    if (is_attendance_channel):
         if (message.author.bot):
             return
 
@@ -76,7 +76,7 @@ async def on_message(message):
             await message.author.remove_roles(in_role)
         return
 
-    if (is_bot_channel) or (is_2f_cardkey_channel):
+    if (is_2f_cardkey_channel):
         print("help/take/return")
         if (message.author.bot):
             return
