@@ -62,7 +62,6 @@ async def on_message(message):
                         "タスケテ", "ﾍlp", "hwkp", "hekp", "jelp", "felp", "gelp", "tasukete", "ｔａｓｕｋｅｔｅ", "本当に助けてください"}
     
     if (is_bot_channel) or (is_attendance_channel):
-        print("code: 0")
         if (message.author.bot):
             return
 
@@ -76,7 +75,6 @@ async def on_message(message):
         return
 
     if (is_bot_channel) or (is_2f_cardkey_channel):
-        print("code: 0")
         if (message.author.bot):
             return
 
