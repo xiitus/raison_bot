@@ -1,4 +1,5 @@
 import os
+from random import randint
 from dotenv import load_dotenv
 from discord import Intents, Client
 
@@ -10,10 +11,14 @@ guild_id = int(os.environ["GUILD_ID"])
 bot_channel_id = int(os.environ["BOT_CHANNEL_ID"])
 card_2f_channel_id = int(os.environ["CARD_2F_CHANNEL_ID"])
 attendance_channel_id = int(os.environ["ATTENDANCE_CHANNEL_ID"])
+door_channel_id = int(os.environ["DOOR_CHANNEL_ID"])
+rule_channel_id = int(os.environ["RULE_CHANNEL_ID"])
+y2023_channel_id = int(os.environ["Y2023_CHANNEL_ID"])
 
 in_role_id = int(os.environ["IN_ROLE_ID"])
 card_2f_role_id = int(os.environ["CARD_2F_ROLE_ID"])
 trial_joining_role_id = int(os.environ["TRIAL_JOINING_ROLE_ID"])
+
 
 intents = Intents.default()
 intents.members = True
@@ -37,7 +42,23 @@ async def on_ready():
 async def on_member_join(member):
     trial_joining_role = member.guild.get_role(trial_joining_role_id)
     await member.add_roles(trial_joining_role)
-    
+    lst = [f"ハーイ、<@{member.id}>！RAISON DȆTREへようこそ！\nまずは落ち着いて、**<#{y2023_channel_id}>**を確認してください……", 
+           f"あなたなのね、<@{member.id}>！RAISON DȆTREへおいで……\nさっそく**<#{y2023_channel_id}>**をチェックしましょう！", 
+           f"ドゥクシ！<@{member.id}>！RAISON DȆTREへようこそ！\nほら、**<#{y2023_channel_id}>**を見ようよ！", 
+           f"<@{member.id}>！ここがRAISON DȆTREさ……！\n見るんだ！**<#{y2023_channel_id}>**を！さあ！", 
+           f"お目にかかれて光栄です……<@{member.id}>さん。\nまずは**<#{y2023_channel_id}>**をご覧ください。", 
+           f"私は汎用AIのロール……RAISON DȆTREへようこそ、<@{member.id}>さん。\n説明のために、**<#{y2023_channel_id}>**をご覧ください。",
+           f"ウホッウホッ！<@{member.id}>！ウホッ！！🍌🍌\nウホホ！**<#{y2023_channel_id}>**！ウホッ！🍌", 
+           ]
+    for channel in client.get_all_channels():
+        if channel.id == door_channel_id:
+            idx = randint(-5, 99) 
+            if (idx < 0):
+                idx = 6
+            else:
+                idx %= 6
+            await channel.send(lst[idx])
+            break
 
 @client.event
 async def on_message(message):
@@ -58,8 +79,6 @@ async def on_message(message):
                         "ていく", "テイク", "ﾃｲｸ", "teiku", "ｔｅｉｋｕ", "て行く", "てうく"}
     returnlike_words = {"return", "ｒｅｔｕｒｎ", "れつrn", "れつｒｎ", "teturn", "retune",
                         "returm", "リターン", "りたーん", "ﾘﾀｰﾝ", "列rn", "retrun", "retrn"}
-    helplike_words = {"help", "ｈｅｌｐ", "へlp", "ヘｌｐ", "へるぷ", "ヘルプ", "たすけて", "ﾍﾙﾌﾟ", "助けて", "ﾀｽｹﾃ", 
-                        "タスケテ", "ﾍlp", "hwkp", "hekp", "jelp", "felp", "gelp", "tasukete", "ｔａｓｕｋｅｔｅ", "本当に助けてください"}
     
     # if (is_attendance_channel):
     if (is_bot_channel):
@@ -83,10 +102,6 @@ async def on_message(message):
             return
 
         user_said = message.content.lower()
-
-        if (user_said in helplike_words) or (user_said[:-1] in helplike_words):
-            print("help")
-            await message.channel.send(f"***help***      -> このヘルプメッセージを表示\n***take***      -> カードキーを所持していることを示すロールを付与\n***return***  -> カードキー返却時に、takeコマンドで付与したロールを剥奪")
 
         if (user_said in takelike_words) or (user_said[:-1] in takelike_words):
             if (card_can_take == True):
