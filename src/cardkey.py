@@ -31,7 +31,7 @@ card_can_take = True
 
 @client.event
 async def on_ready():
-    print(f"カードキーちゃん が起動しました")
+    print(f"ロールちゃん が起動しました")
     global card_can_take
     for guild in client.guilds:
         for role in guild.roles:
