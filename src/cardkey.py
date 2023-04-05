@@ -80,8 +80,8 @@ async def on_message(message):
     returnlike_words = {"return", "ｒｅｔｕｒｎ", "れつrn", "れつｒｎ", "teturn", "retune",
                         "returm", "リターン", "りたーん", "ﾘﾀｰﾝ", "列rn", "retrun", "retrn"}
     
-    # if (is_attendance_channel):
-    if (is_bot_channel):
+    if (is_attendance_channel):
+    # if (is_bot_channel):
         if (message.author.bot):
             return
 
@@ -96,8 +96,8 @@ async def on_message(message):
             await message.author.remove_roles(in_role)
         return
 
-    # if (is_2f_cardkey_channel):
-    if (is_bot_channel):
+    if (is_2f_cardkey_channel):
+    # if (is_bot_channel):
         if (message.author.bot):
             return
 
