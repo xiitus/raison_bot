@@ -1,4 +1,5 @@
 import os
+import math
 from random import randint
 from dotenv import load_dotenv
 from discord import Intents, Client
@@ -80,12 +81,12 @@ async def on_message(message):
     returnlike_words = {"return", "ｒｅｔｕｒｎ", "れつrn", "れつｒｎ", "teturn", "retune",
                         "returm", "リターン", "りたーん", "ﾘﾀｰﾝ", "列rn", "retrun", "retrn"}
     
+    user_said = message.content.lower()
+    
     if (is_attendance_channel):
     # if (is_bot_channel):
         if (message.author.bot):
             return
-
-        user_said = message.content.lower()
 
         if (user_said in inlike_words) or (user_said[:-1] in inlike_words):
             print(f"{message.author} is in")
@@ -100,8 +101,6 @@ async def on_message(message):
     # if (is_bot_channel):
         if (message.author.bot):
             return
-
-        user_said = message.content.lower()
 
         if (user_said in takelike_words) or (user_said[:-1] in takelike_words):
             if (card_can_take == True):
@@ -121,6 +120,26 @@ async def on_message(message):
                 print(f"{message.author} returned")
                 await message.channel.send(f"**<@{message.author.id}> がカードキーを返却!**")
                 await message.author.remove_roles(card_2f_role)
+
+    if (is_bot_channel):
+        if (user_said == "get_in_data"):
+            people = len(message.guild.get_role(in_role_id).members)
+            messages = [f"**ガラ空き……ライバルをぶっちぎるチャンスだね! 世界を創る準備はできた?**", 
+                        f"**席にはまだまだ空きがあるよ! 競争の世界に、おいでおいで!**", 
+                        f"**いつもよりちょっぴりにぎやか! ライバルは今も生産してるぞ!**", 
+                        f"**ストイックな場所だね……これが競争の世界というわけか!**", 
+                        f"**ワーオ! こんなに多くの人間が励んでいるの? 最高の場所だ……!**", 
+                        f"**待って、待つんだ……そろそろパンクする。みみみみんな落ち着いて!😵**", 
+                        f"**OK……完全に満員だ、今はね。 これからオフィスに来ようとしている人は, 考え直そう……**", 
+                        f"**満員を超えているぞ! 一体どうやったんだ? 空間のエントロピーが高すぎる!**"
+                        ]
+            say = messages[math.floor(people / 6)]
+            if (people == 26):
+                say = messages[6]
+            elif (people > 26):
+                say = messages[7]
+            await message.channel.send(f"**現在のin人数は{people}人!**")
+            await message.channel.send(say)
         return
     return
 
