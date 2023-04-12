@@ -16,10 +16,11 @@ door_channel_id = int(os.environ["DOOR_CHANNEL_ID"])
 rule_channel_id = int(os.environ["RULE_CHANNEL_ID"])
 y2023_channel_id = int(os.environ["Y2023_CHANNEL_ID"])
 
+
 in_role_id = int(os.environ["IN_ROLE_ID"])
 card_2f_role_id = int(os.environ["CARD_2F_ROLE_ID"])
 trial_joining_role_id = int(os.environ["TRIAL_JOINING_ROLE_ID"])
-
+office_training_role_id = int(os.environ["OFFICE_TRAINING_ROLE_ID"])
 
 intents = Intents.default()
 intents.members = True
@@ -30,6 +31,7 @@ client = Client(intents=intents)
 
 card_can_take = True
 
+
 @client.event
 async def on_ready():
     print(f"ロールちゃん が起動しました")
@@ -39,27 +41,29 @@ async def on_ready():
             if (role.id == card_2f_role_id) and not (role.members == []):
                 card_can_take = False
 
+
 @client.event
 async def on_member_join(member):
     trial_joining_role = member.guild.get_role(trial_joining_role_id)
     await member.add_roles(trial_joining_role)
-    lst = [f"ハーイ、<@{member.id}>！RAISON DȆTREへようこそ！\nまずは落ち着いて、**<#{y2023_channel_id}>**を確認してください……", 
-           f"あなたなのね、<@{member.id}>！RAISON DȆTREへおいで……\nさっそく**<#{y2023_channel_id}>**をチェックしましょう！", 
-           f"ドゥクシ！<@{member.id}>！RAISON DȆTREへようこそ！\nほら、**<#{y2023_channel_id}>**を見ようよ！", 
-           f"<@{member.id}>！ここがRAISON DȆTREさ……！\n見るんだ！**<#{y2023_channel_id}>**を！さあ！", 
-           f"お目にかかれて光栄です……<@{member.id}>さん。\nまずは**<#{y2023_channel_id}>**をご覧ください。", 
+    lst = [f"ハーイ、<@{member.id}>！RAISON DȆTREへようこそ！\nまずは落ち着いて、**<#{y2023_channel_id}>**を確認してください……",
+           f"あなたなのね、<@{member.id}>！RAISON DȆTREへおいで……\nさっそく**<#{y2023_channel_id}>**をチェックしましょう！",
+           f"ドゥクシ！<@{member.id}>！RAISON DȆTREへようこそ！\nほら、**<#{y2023_channel_id}>**を見ようよ！",
+           f"<@{member.id}>！ここがRAISON DȆTREさ……！\n見るんだ！**<#{y2023_channel_id}>**を！さあ！",
+           f"お目にかかれて光栄です……<@{member.id}>さん。\nまずは**<#{y2023_channel_id}>**をご覧ください。",
            f"私は汎用AIのロール……RAISON DȆTREへようこそ、<@{member.id}>さん。\n説明のために、**<#{y2023_channel_id}>**をご覧ください。",
-           f"ウホッウホッ！<@{member.id}>！ウホッ！！🍌🍌\nウホホ！**<#{y2023_channel_id}>**！ウホッ！🍌", 
+           f"ウホッウホッ！<@{member.id}>！ウホッ！！🍌🍌\nウホホ！**<#{y2023_channel_id}>**！ウホッ！🍌",
            ]
     for channel in client.get_all_channels():
         if channel.id == door_channel_id:
-            idx = randint(-5, 99) 
+            idx = randint(-5, 99)
             if (idx < 0):
                 idx = 6
             else:
                 idx %= 6
             await channel.send(lst[idx])
             break
+
 
 @client.event
 async def on_message(message):
@@ -71,25 +75,29 @@ async def on_message(message):
 
     in_role = message.guild.get_role(in_role_id)
     card_2f_role = message.guild.get_role(card_2f_role_id)
+    trial_joining_role = message.guild.get_role(trial_joining_role_id)
+    office_training_role = message.guild.get_role(office_training_role_id)
 
     inlike_words = {"in", "いn", "un", "on", "im", "inn",
                     "いｎ", "ｉｎ", "いん", "イン", "ｲﾝ", "ｉｎｎ"}
     outlike_words = {"out", "put", "iut", "おうt", "auto", "ａｕｔｏ",
                      "おうｔ", "our", "ｏｕｔ", "あうと", "アウト", "ｱｳﾄ"}
-    takelike_words = {"take", "ｔａｋｅ", "たけ", "タケ", "ﾀｹ", "rake", "竹", "ねいく", 
-                        "ていく", "テイク", "ﾃｲｸ", "teiku", "ｔｅｉｋｕ", "て行く", "てうく"}
+    takelike_words = {"take", "ｔａｋｅ", "たけ", "タケ", "ﾀｹ", "rake", "竹", "ねいく",
+                      "ていく", "テイク", "ﾃｲｸ", "teiku", "ｔｅｉｋｕ", "て行く", "てうく"}
     returnlike_words = {"return", "ｒｅｔｕｒｎ", "れつrn", "れつｒｎ", "teturn", "retune",
                         "returm", "returb", "リターン", "りたーん", "ﾘﾀｰﾝ", "列rn", "retrun", "retrn"}
-    
+
     user_said = message.content.lower()
-    
-    if (is_attendance_channel):
-    # if (is_bot_channel):
+
+    if (is_attendance_channel) or (is_bot_channel):
+        # if (is_bot_channel):
         if (message.author.bot):
             return
 
         if (user_said in inlike_words) or (user_said[:-1] in inlike_words):
             print(f"{message.author} is in")
+            await message.author.remove_roles(trial_joining_role)
+            await message.author.add_roles(office_training_role)
             await message.author.add_roles(in_role)
 
         if (user_said in outlike_words) or (user_said[:-1] in outlike_words):
@@ -98,7 +106,7 @@ async def on_message(message):
         return
 
     if (is_2f_cardkey_channel):
-    # if (is_bot_channel):
+        # if (is_bot_channel):
         if (message.author.bot):
             return
 
@@ -124,13 +132,13 @@ async def on_message(message):
     if (is_bot_channel):
         if (user_said == "get_in_data"):
             people = len(message.guild.get_role(in_role_id).members)
-            messages = [f"**ガラ空き……ライバルをぶっちぎるチャンスだね! 世界を創る準備はできた?**", 
-                        f"**席にはまだまだ空きがあるよ! 競争の世界に、おいでおいで!**", 
-                        f"**いつもよりちょっぴりにぎやか! ライバルは今も生産してるぞ!**", 
-                        f"**ストイックな場所だね……これが競争の世界というわけか!**", 
-                        f"**ワーオ! こんなに多くの人間が励んでいるの? 最高の場所だ……!**", 
-                        f"**待って、待つんだ……そろそろパンクする。みみみみんな落ち着いて!😵**", 
-                        f"**OK……完全に満員だ、今はね。 これからオフィスに来ようとしている人は, 考え直そう……**", 
+            messages = [f"**ガラ空き……ライバルをぶっちぎるチャンスだね! 世界を創る準備はできた?**",
+                        f"**席にはまだまだ空きがあるよ! 競争の世界に、おいでおいで!**",
+                        f"**いつもよりちょっぴりにぎやか! ライバルは今も生産してるぞ!**",
+                        f"**ストイックな場所だね……これが競争の世界というわけか!**",
+                        f"**ワーオ! こんなに多くの人間が励んでいるの? 最高の場所だ……!**",
+                        f"**待って、待つんだ……そろそろパンクする。みみみみんな落ち着いて!😵**",
+                        f"**OK……完全に満員だ、今はね。 これからオフィスに来ようとしている人は, 考え直そう……**",
                         f"**満員を超えているぞ! 一体どうやったんだ? 空間のエントロピーが高すぎる!**"
                         ]
             say = messages[math.floor(people / 6)]
