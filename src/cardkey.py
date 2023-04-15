@@ -56,7 +56,7 @@ async def on_member_join(member):
            ]
     for channel in client.get_all_channels():
         if channel.id == door_channel_id:
-            idx = randint(-5, 99)
+            idx = randint(-1, 99)
             if (idx < 0):
                 idx = 6
             else:
