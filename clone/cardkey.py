@@ -1,5 +1,3 @@
-from discord.app_commands import CommandTree
-from discord import Intents, Client, Interaction
 import os
 import math
 from random import randint
@@ -28,28 +26,6 @@ intents = Intents.default()
 intents.members = True
 intents.message_content = True
 intents.presences = True
-
-load_dotenv()
-
-
-class MyClient(Client):
-    def __init__(self, intents: Intents) -> None:
-        super().__init__(intents=intents)
-        self.tree = CommandTree(self)
-
-
-async def setup_hook(self) -> None:
-    await self.tree.sync()
-
-
-intents = Intents.default()
-client = MyClient(intents=intents)
-
-
-@client.tree.command()
-async def hello(interaction: Interaction):
-    await interaction.response.send_message(f'Hello, {interaction.user.mention}')
-
 
 client = Client(intents=intents)
 
