@@ -21,6 +21,7 @@ in_role_id = int(os.environ["IN_ROLE_ID"])
 card_2f_role_id = int(os.environ["CARD_2F_ROLE_ID"])
 trial_joining_role_id = int(os.environ["TRIAL_JOINING_ROLE_ID"])
 office_training_role_id = int(os.environ["OFFICE_TRAINING_ROLE_ID"])
+cardkey_dead_role_id = int(os.environ["CARDKEY_DEAD_ROLE_ID"])
 
 intents = Intents.default()
 intents.members = True
@@ -40,6 +41,15 @@ async def on_ready():
         for role in guild.roles:
             if (role.id == card_2f_role_id) and not (role.members == []):
                 card_can_take = False
+
+
+def is_lost(S):
+    words = {"lost", "ぉst", "ｌｏｓｔ", "ぉｓｔ",
+             "ろすと", "ロスト", "失", "なくし", "落", "置", "忘"}
+    for word in words:
+        if (word in S):
+            return (True)
+    return (False)
 
 
 @client.event
@@ -77,6 +87,13 @@ async def on_message(message):
     card_2f_role = message.guild.get_role(card_2f_role_id)
     trial_joining_role = message.guild.get_role(trial_joining_role_id)
     office_training_role = message.guild.get_role(office_training_role_id)
+    cardkey_dead_role = message.guild.get_role(cardkey_dead_role_id)
+
+    card_is_dead = False
+    for guild in client.guilds:
+        for role in guild.roles:
+            if (role.id == cardkey_dead_role_id) and not (role.members == []):
+                card_is_dead = True
 
     inlike_words = {"in", "いn", "un", "on", "im", "inn",
                     "いｎ", "ｉｎ", "いん", "イン", "ｲﾝ", "ｉｎｎ"}
@@ -86,6 +103,7 @@ async def on_message(message):
                       "ていく", "テイク", "ﾃｲｸ", "teiku", "ｔｅｉｋｕ", "て行く", "てうく"}
     returnlike_words = {"return", "ｒｅｔｕｒｎ", "れつrn", "れつｒｎ", "teturn", "retune",
                         "returm", "returb", "リターン", "りたーん", "ﾘﾀｰﾝ", "列rn", "retrun", "retrn"}
+    fixlike_words = {"fix", "fixed", "ふぃぇd", "ｆｉｘｅｄ", "ふぃぇｄ"}
 
     user_said = message.content.lower()
 
@@ -105,12 +123,32 @@ async def on_message(message):
             await message.author.remove_roles(in_role)
         return
 
-    if (is_2f_cardkey_channel):
-        # if (is_bot_channel):
+    # if (is_2f_cardkey_channel):
+    if (is_bot_channel):
         if (message.author.bot):
             return
 
+        if (user_said in fixlike_words):
+            card_can_take = True
+            await message.channel.send(f"**神聖なるカードは正位置へと戻った……この事件を忘れてはいけない。**")
+            for guild in client.guilds:
+                for member in guild.members:
+                    if (member.id == 1073911059066396672):
+                        await member.remove_roles(cardkey_dead_role)
+
+        if (is_lost(user_said)):
+            card_can_take = False
+            await message.channel.send(f"**ピピピ……カードキーは *fix* コマンドが使用されるまで使用禁止になります。**")
+            for guild in client.guilds:
+                for member in guild.members:
+                    if (member.id == 1073911059066396672):
+                        await member.add_roles(cardkey_dead_role)
+            await message.channel.send(f"**助けて、<@{493667859633930240}>!**")
+
         if (user_said in takelike_words) or (user_said[:-1] in takelike_words):
+            if (card_is_dead):
+                await message.channel.send(f"**カードキー・システムはダウン中……**")
+                return
             if (card_can_take == True):
                 print(f"{message.author} took")
                 card_can_take = False
@@ -121,6 +159,9 @@ async def on_message(message):
                 await message.channel.send(f"**カードは現在 <@{role_member}> が装備中!**")
 
         if (user_said in returnlike_words) or (user_said[:-1] in returnlike_words):
+            if (card_is_dead):
+                await message.channel.send(f"**カードキー・システムはダウン中……**")
+                return
             if (card_can_take == True):
                 await message.channel.send(f"**カードはまだ 2F にあります!**")
             elif (card_can_take == False):
