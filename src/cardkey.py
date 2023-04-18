@@ -148,7 +148,7 @@ async def on_message(message):
                 for member in guild.members:
                     if (member.id == 1073911059066396672):
                         await member.add_roles(cardkey_dead_role)
-            await message.channel.send(f"**助けて、<@{974162342780731432}> <@{974162427702812702}>!**")
+            await message.channel.send(f"**助けて、<@{479676924822814731}> <@{959367860734537748}> <@{493667859633930240}>!**")
 
         if (user_said in takelike_words) or (user_said[:-1] in takelike_words):
             if (card_is_dead):
