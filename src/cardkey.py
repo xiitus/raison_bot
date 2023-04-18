@@ -1,5 +1,6 @@
 import os
 import math
+from datetime import datetime
 from random import randint
 from dotenv import load_dotenv
 from discord import Intents, Client
@@ -45,7 +46,7 @@ async def on_ready():
 
 def is_lost(S):
     words = {"lost", "ぉst", "ｌｏｓｔ", "ぉｓｔ",
-             "ろすと", "ロスト", "失", "なくし", "落", "置", "忘"}
+             "ろすと", "ロスト", "失", "なくし", "落", "置", "忘", "紛", "おとし", "おいてき"}
     for word in words:
         if (word in S):
             return (True)
@@ -108,7 +109,6 @@ async def on_message(message):
     user_said = message.content.lower()
 
     if (is_attendance_channel):
-        # if (is_bot_channel):
         if (message.author.bot):
             return
 
@@ -126,6 +126,7 @@ async def on_message(message):
     # if (is_2f_cardkey_channel):
     if (is_bot_channel):
         if (message.author.bot):
+            await message.channel.send(90)
             return
 
         if (user_said in fixlike_words):
@@ -143,7 +144,7 @@ async def on_message(message):
                 for member in guild.members:
                     if (member.id == 1073911059066396672):
                         await member.add_roles(cardkey_dead_role)
-            await message.channel.send(f"**助けて、<@{493667859633930240}>!**")
+            await message.channel.send(f"**助けて、<@{974162342780731432}> <@{974162427702812702}>!**")
 
         if (user_said in takelike_words) or (user_said[:-1] in takelike_words):
             if (card_is_dead):
