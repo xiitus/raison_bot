@@ -126,7 +126,6 @@ async def on_message(message):
     # if (is_2f_cardkey_channel):
     if (is_bot_channel):
         if (message.author.bot):
-            await message.channel.send(90)
             return
 
         if (user_said in fixlike_words):
