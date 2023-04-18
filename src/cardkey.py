@@ -1,6 +1,7 @@
 import os
 import math
-from datetime import datetime
+import threading
+import time
 from random import randint
 from dotenv import load_dotenv
 from discord import Intents, Client
@@ -42,6 +43,13 @@ async def on_ready():
         for role in guild.roles:
             if (role.id == card_2f_role_id) and not (role.members == []):
                 card_can_take = False
+
+
+def set_thread(n, ID):
+    t = time.time()
+    thread = threading.Timer(1800, my_function, args=[ID])
+    thread.start()
+    thread = threading.Timer(n, )
 
 
 def is_lost(S):
@@ -193,3 +201,4 @@ async def on_message(message):
     return
 
 client.run(token)
+
