@@ -14,4 +14,4 @@ def main() -> None:
     print(answer)
 
 
-main()
+main()ー
