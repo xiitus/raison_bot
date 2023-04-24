@@ -183,10 +183,13 @@ async def on_message(message):
                 for member in guild.members:
                     members.append(member)
             channel = client.get_channel(attendance_channel_id)
-            messages = channel.history(limit=None)
+
+            async def generate():
+                for h in channel.history(limit=None):
+                    yield h
             target_messages = []
-            for message in messages:
-                if message.created_at >= 0:
+            for message in generate():
+                if message.created_at >= datetime(2023, 4, 10):
                     target_messages.append(message.content)
             print(target_messages)
             return
