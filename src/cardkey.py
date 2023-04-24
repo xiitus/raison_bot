@@ -181,7 +181,8 @@ async def on_message(message):
             for guild in client.guilds:
                 for member in guild.members:
                     members.append(member)
-            print(members)
+            for m in members:
+                print(members)
             return
 
         if (user_said == "get_in_data"):
