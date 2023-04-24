@@ -1,5 +1,6 @@
 import os
 import math
+import datetime
 from random import randint
 from dotenv import load_dotenv
 from discord import Intents, Client
@@ -181,8 +182,14 @@ async def on_message(message):
             for guild in client.guilds:
                 for member in guild.members:
                     members.append(member)
-            for m in members:
-                print(m)
+            channel = client.get_channel(attendance_channel_id)
+            messages = await channel.history(limit=None).flatten()
+            target_date = datetime(2023, 4, 10)  # 特定の日付を指定
+            target_messages = []
+            for message in messages:
+                if message.created_at >= target_date:
+                    target_messages.append(message.content)
+            print(target_messages)
             return
 
         if (user_said == "get_in_data"):
