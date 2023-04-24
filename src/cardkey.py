@@ -2,7 +2,13 @@ import os
 import math
 from random import randint
 from dotenv import load_dotenv
-from discord import Intents, Client
+import discord
+import subprocess
+import time
+from discord.ext import commands
+from discord_rpc import DiscordIpcClient, Presence
+
+
 
 load_dotenv()
 
@@ -33,6 +39,7 @@ client = Client(intents=intents)
 card_can_take = True
 
 
+
 @client.event
 async def on_ready():
     print(f"ロールちゃん が起動しました")
@@ -58,6 +65,7 @@ def is_lost(S):
     return (False)
 
 
+
 @client.event
 async def on_member_join(member):
     trial_joining_role = member.guild.get_role(trial_joining_role_id)
@@ -81,6 +89,9 @@ async def on_member_join(member):
             break
 
 
+
+
+#ユーザーがメッセージを送信したときに発動するイベントハンドラ
 @client.event
 async def on_message(message):
     global card_can_take
@@ -197,4 +208,67 @@ async def on_message(message):
         return
     return
 
+
+
+
 client.run(token)
+
+
+# 以下、Wi-Fi接続状態の監視
+wifi_ssid = {"frourio-2.4G-WPA3", "frourio-2.4G-2F-WPA3", "frourio-2.4G-2F-sub", "frourio-2.4G-2F-WPA2", "frourio-5G-2F-sub", "frourio-5G-2F-WPA2", "frourio-5G-2F-WPA3"}  # ここに自分のWi-FiのSSIDを入力してください
+
+#接続状態が変化した場合にhandle_wifi_connnection_changeを呼び出す
+def is_wifi_connected():
+    try:
+        result = subprocess.check_output("iwgetid -r", shell=True).decode().strip()
+        wifi_ssid = "your_wifi_ssid"  # ここに自分のWi-FiのSSIDを入力してください
+        if result == wifi_ssid:
+            return True
+    except subprocess.CalledProcessError:
+        pass
+    return False
+
+async def on_connected(user):
+    print(f"Connected to {user.name} ({user.id})")
+    role_name = "in_role"  # ここに追加するロール名を入力してください
+    role = discord.utils.get(guild.roles, name=role_name)
+    await user.add_roles(role)
+    print(f"{user.name} has been added to {role_name} role")
+
+def on_disconnected():
+    print("Disconnected from Discord")
+
+def handle_wifi_connection_change(connected, client):
+    if connected:
+        if client.connected:
+            presence = Presence(client)
+            presence.connect()
+            user = presence.get_user()
+            bot.loop.create_task(on_connected(user))
+            presence.close()
+    else:
+        if client.connected:
+            client.disconnect()
+
+CLIENT_ID = 'JUSTIN_CLIENT_ID'  # Discord Developer Portalで作成したアプリケーションのクライアントID
+DISCORD_BOT_TOKEN = 'CARD_BOT_TOKEN'  # Discord Botのトークン
+
+connected = False
+client = DiscordIpcClient.for_platform(os.name)
+
+bot = commands.Bot(command_prefix='!')
+
+@bot.event
+async def on_ready():
+    global guild
+    print(f"Logged in as {bot.user.name}")
+    guild = bot.guilds[0]
+
+while True:
+    new_connected = is_wifi_connected()
+    if new_connected != connected:
+        connected = new_connected
+        handle_wifi_connection_change(connected, client)
+    time.sleep(60)
+
+bot.run(DISCORD_BOT_TOKEN)
