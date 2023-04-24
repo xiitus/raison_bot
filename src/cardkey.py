@@ -184,10 +184,9 @@ async def on_message(message):
                     members.append(member)
             channel = client.get_channel(attendance_channel_id)
             messages = channel.history(limit=None)
-            target_date = datetime(2023, 4, 10)  # 特定の日付を指定
             target_messages = []
             for message in messages:
-                if message.created_at >= target_date:
+                if message.created_at >= 0:
                     target_messages.append(message.content)
             print(target_messages)
             return
