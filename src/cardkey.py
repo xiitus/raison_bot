@@ -188,7 +188,7 @@ async def on_message(message):
                 for h in channel.history(limit=None):
                     yield h
             target_messages = []
-            for message in generate():
+            async for message in generate():
                 if message.created_at >= datetime(2023, 4, 10):
                     target_messages.append(message.content)
             print(target_messages)
