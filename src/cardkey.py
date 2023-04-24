@@ -177,13 +177,13 @@ async def on_message(message):
                 await message.author.remove_roles(card_2f_role)
 
     if (is_bot_channel):
-        if (user_said == "timestat"):
+        if (user_said == "t"):
             members = []
             for guild in client.guilds:
                 for member in guild.members:
                     members.append(member)
             channel = client.get_channel(attendance_channel_id)
-            messages = await channel.history(limit=None).flatten()
+            messages = await channel.history(limit=None)
             target_date = datetime(2023, 4, 10)  # 特定の日付を指定
             target_messages = []
             for message in messages:
