@@ -185,7 +185,7 @@ async def on_message(message):
             channel = client.get_channel(attendance_channel_id)
 
             async def generate():
-                for h in channel.history(limit=None):
+                async for h in channel.history(limit=None):
                     yield h
             target_messages = []
             async for message in generate():
