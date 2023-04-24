@@ -176,6 +176,14 @@ async def on_message(message):
                 await message.author.remove_roles(card_2f_role)
 
     if (is_bot_channel):
+        if (user_said == "timestat"):
+            members = []
+            for guild in client.guilds:
+                for member in guild.members:
+                    members.append(member)
+            print(members)
+            return
+
         if (user_said == "get_in_data"):
             people = len(message.guild.get_role(in_role_id).members)
             messages = [f"**ガラ空き……ライバルをぶっちぎるチャンスだね! 世界を創る準備はできた?**",
