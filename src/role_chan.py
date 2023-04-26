@@ -2,7 +2,7 @@ import os
 import math
 from random import randint
 from dotenv import load_dotenv
-from discord import Intents, Client
+from discord import Intents, Client, Game, Status
 from datetime import datetime, timezone
 
 load_dotenv()
@@ -47,12 +47,17 @@ fixlike_words = {"fix", "fixed", "ふぃぇd", "ｆｉｘｅｄ", "ふぃぇｄ"
 
 @client.event
 async def on_ready():
+    guild = client.get_guild(guild_id)
     print(f"ロールちゃん が起動しました")
     global card_can_take
     for guild in client.guilds:
         for role in guild.roles:
             if (role.id == card_2f_role_id) and not (role.members == []):
                 card_can_take = False
+
+    people = len(guild.get_role(in_role_id).members)
+    game = Game(f"{people}人が RAISON DÊTRE")
+    await client.change_presence(status=Status.idle, activity=game)
 
 
 def is_lost(S):
@@ -234,6 +239,10 @@ async def on_message(message):
                 card_is_dead = True
 
     user_said = message.content.lower()
+
+    people = len(message.guild.get_role(in_role_id).members)
+    game = Game(f"{people}人が RAISON DÊTRE")
+    await client.change_presence(status=Status.idle, activity=game)
 
     if (is_attendance_channel):
         if (message.author.bot):
