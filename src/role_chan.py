@@ -147,7 +147,7 @@ async def get_newby_rank(after_date, before_date):
     await channel.send(f"***Ranking of newby:\n{after_date} ~ {before_date}***")
     i = 1
     for a in ans2:
-        await channel.send(f"**{i}位: <@{a[0]}> - {int(a[1][0])}h {int(a[1][1])}m (in回数 {a[1][2]}回)**\n")
+        await channel.send(f"{i}位: <@{a[0]}> - {int(a[1][0])}h {int(a[1][1])}m (in回数 {a[1][2]}回)\n")
         i += 1
     return ans2
 
