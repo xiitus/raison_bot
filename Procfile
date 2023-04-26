@@ -1,1 +1,1 @@
-worker: python src/cardkey.py
+worker: python src/role_chan.py
