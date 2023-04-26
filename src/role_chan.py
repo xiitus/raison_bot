@@ -74,7 +74,6 @@ def subtime(unix_time1: float, unix_time2: float) -> tuple:
 async def on_member_join(member):
     newby_role = member.guild.get_role(newby_role_id)
     trial_joining_role = member.guild.get_role(trial_joining_role_id)
-
     await member.add_roles(newby_role)
     await member.add_roles(trial_joining_role)
 
@@ -224,9 +223,9 @@ async def on_message(message):
 
     in_role = message.guild.get_role(in_role_id)
     card_2f_role = message.guild.get_role(card_2f_role_id)
+    cardkey_dead_role = message.guild.get_role(cardkey_dead_role_id)
     trial_joining_role = message.guild.get_role(trial_joining_role_id)
     office_training_role = message.guild.get_role(office_training_role_id)
-    cardkey_dead_role = message.guild.get_role(cardkey_dead_role_id)
 
     card_is_dead = False
     for guild in client.guilds:
