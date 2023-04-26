@@ -72,7 +72,9 @@ def subtime(unix_time1: float, unix_time2: float) -> tuple:
 
 @client.event
 async def on_member_join(member):
+    newby_role = member.guild.get_role(newby_role_id)
     trial_joining_role = member.guild.get_role(trial_joining_role_id)
+    await message.author.add_roles(newby_role)
     await member.add_roles(trial_joining_role)
     lst = [f"ハーイ、<@{member.id}>！RAISON DȆTREへようこそ！\nまずは落ち着いて、**<#{y2023_channel_id}>**を確認してください……",
            f"あなたなのね、<@{member.id}>！RAISON DȆTREへおいで……\nさっそく**<#{y2023_channel_id}>**をチェックしましょう！",
@@ -220,7 +222,6 @@ async def on_message(message):
     in_role = message.guild.get_role(in_role_id)
     card_2f_role = message.guild.get_role(card_2f_role_id)
     trial_joining_role = message.guild.get_role(trial_joining_role_id)
-    newby_role = message.guild.get_role(newby_role_id)
     office_training_role = message.guild.get_role(office_training_role_id)
     cardkey_dead_role = message.guild.get_role(cardkey_dead_role_id)
 
@@ -240,7 +241,6 @@ async def on_message(message):
             print(f"{message.author} is in")
             await message.author.remove_roles(trial_joining_role)
             await message.author.add_roles(office_training_role)
-            await message.author.add_roles(newby_role)
             await message.author.add_roles(in_role)
 
         if (user_said in outlike_words) or (user_said[:-1] in outlike_words):
