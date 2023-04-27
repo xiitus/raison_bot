@@ -237,7 +237,7 @@ async def on_message(message):
             await message.author.remove_roles(in_role)
 
     if (is_2f_cardkey_channel):
-    # if (is_bot_channel):
+        # if (is_bot_channel):
         if (message.author.bot):
             return
 
@@ -281,13 +281,10 @@ async def on_message(message):
             d2 = datetime(2023, 4, 30, tzinfo=timezone.utc)
             await get_newby_rank(after_date=d1, before_date=d2)
 
-
         if (user_said == "all_ranking_plz"):
             d1 = datetime(2023, 4, 9, tzinfo=timezone.utc)
             d2 = datetime(2023, 4, 30, tzinfo=timezone.utc)
-            await get_newby_rank(after_date=d1, before_date=d2)
             await get_all_rank(after_date=d1, before_date=d2)
-            
 
         if (user_said == "get_in_data"):
             people = len(message.guild.get_role(in_role_id).members)
