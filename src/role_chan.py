@@ -52,6 +52,7 @@ async def on_ready():
     print(f"ロールちゃん が起動しました")
 
     people = len(guild.get_role(in_role_id).members)
+    print(people, "人がin中")
     game = Game(f"{people}人が RAISON DÊTRE")
     await client.change_presence(status=Status.idle, activity=game)
 
@@ -222,6 +223,7 @@ async def on_message(message):
         card_can_take = False
 
     people = len(message.guild.get_role(in_role_id).members)
+    print(people, "人がin中")
     game = Game(f"{people}人が RAISON DÊTRE")
     await client.change_presence(status=Status.idle, activity=game)
 
