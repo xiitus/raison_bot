@@ -38,7 +38,7 @@ card_can_take = True
 inlike_words = {"in", "いn", "un", "on", "im", "inn",
                 "いｎ", "ｉｎ", "いん", "イン", "ｲﾝ", "ｉｎｎ"}
 outlike_words = {"out", "put", "iut", "おうt", "auto", "ａｕｔｏ",
-                 "おうｔ", "our", "ｏｕｔ", "あうと", "アウト", "ｱｳﾄ"}
+                 "おうｔ", "our", "ｏｕｔ", "oup", "あうと", "アウト", "ｱｳﾄ"}
 takelike_words = {"take", "ｔａｋｅ", "たけ", "タケ", "ﾀｹ", "rake", "竹", "ねいく",
                   "ていく", "テイク", "ﾃｲｸ", "teiku", "ｔｅｉｋｕ", "て行く", "てうく"}
 returnlike_words = {"return", "ｒｅｔｕｒｎ", "れつrn", "れつｒｎ", "teturn", "retune",
