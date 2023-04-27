@@ -135,7 +135,7 @@ async def get_newby_rank(after_date, before_date):
     print(ans2)
 
     channel = server.get_channel(bot_channel_id)
-    await channel.send(f"***Ranking of newby:\n{after_date} ~ {before_date}***")
+    await channel.send(f"***Ranking of newby:\n{after_date.date()} ~ {before_date.date()}***")
     i = 1
     for a in ans2:
         await channel.send(f"{i}位: <@{a[0]}> - ***{int(a[1][0])}h {int(a[1][1])}m*** (*in回数: **{a[1][2]}** 回*)\n")
@@ -191,7 +191,7 @@ async def get_all_rank(after_date, before_date):
     print(ans2)
 
     channel = server.get_channel(bot_channel_id)
-    await channel.send(f"***Ranking of all:\n{after_date} ~ {before_date}***")
+    await channel.send(f"***Ranking of all:\n{after_date.date()} ~ {before_date.date()}***")
     i = 1
     for a in ans2:
         await channel.send(f"{i}位: <@{a[0]}> - ***{int(a[1][0])}h {int(a[1][1])}m*** (*in回数: **{a[1][2]}** 回*)\n")
