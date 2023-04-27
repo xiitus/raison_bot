@@ -54,7 +54,7 @@ async def on_ready():
     people = len(guild.get_role(in_role_id).members)
     print(people, "人がin中")
     game = Game(f"{people}人が RAISON DÊTRE")
-    await client.change_presence(status=Status.idle, activity=game)
+    await client.change_presence(status=Status.online, activity=game)
 
 
 @client.event
@@ -225,7 +225,7 @@ async def on_message(message):
     people = len(message.guild.get_role(in_role_id).members)
     print(people, "人がin中")
     game = Game(f"{people}人が RAISON DÊTRE")
-    await client.change_presence(status=Status.idle, activity=game)
+    await client.change_presence(status=Status.online, activity=game)
 
     user_said = message.content.lower()
 
