@@ -222,11 +222,6 @@ async def on_message(message):
     if (card_2f_role.members != []):
         card_can_take = False
 
-    people = len(message.guild.get_role(in_role_id).members)
-    print(people, "人がin中")
-    game = Game(f"{people}人が RAISON DÊTRE")
-    await client.change_presence(status=Status.online, activity=game)
-
     user_said = message.content.lower()
 
     if (is_attendance_channel):
@@ -240,10 +235,9 @@ async def on_message(message):
 
         if (user_said in outlike_words) or (user_said[:-1] in outlike_words):
             await message.author.remove_roles(in_role)
-        return
 
-    # if (is_2f_cardkey_channel):
-    if (is_bot_channel):
+    if (is_2f_cardkey_channel):
+    # if (is_bot_channel):
         if (message.author.bot):
             return
 
@@ -286,14 +280,14 @@ async def on_message(message):
             d1 = datetime(2023, 4, 9, tzinfo=timezone.utc)
             d2 = datetime(2023, 4, 30, tzinfo=timezone.utc)
             await get_newby_rank(after_date=d1, before_date=d2)
-            return
+
 
         if (user_said == "all_ranking_plz"):
             d1 = datetime(2023, 4, 9, tzinfo=timezone.utc)
             d2 = datetime(2023, 4, 30, tzinfo=timezone.utc)
             await get_newby_rank(after_date=d1, before_date=d2)
             await get_all_rank(after_date=d1, before_date=d2)
-            return
+            
 
         if (user_said == "get_in_data"):
             people = len(message.guild.get_role(in_role_id).members)
@@ -313,7 +307,12 @@ async def on_message(message):
                 say = messages[7]
             await message.channel.send(f"**現在のin人数は{people}人!**")
             await message.channel.send(say)
-        return
+
+    people = len(message.guild.get_role(in_role_id).members)
+    print(people, "人がin中")
+    game = Game(f"{people}人が RAISON DÊTRE")
+    await client.change_presence(status=Status.online, activity=game)
+
     return
 
 client.run(token)
