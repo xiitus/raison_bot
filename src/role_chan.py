@@ -1,6 +1,6 @@
 import os
 import math
-from magic import *
+import magic
 from random import randint
 from dotenv import load_dotenv
 from discord import Intents, Client, Game, Status
@@ -125,7 +125,7 @@ async def get_newby_rank(after_date, before_date):
         length = min(len(tmp[n][0]), len(tmp[n][1]))
         ans[n].append(length)
         for i in range(length):
-            t = subtime(tmp[n][0][i], tmp[n][1][i])
+            t = magic.subtime(tmp[n][0][i], tmp[n][1][i])
             ans[n][0] += t[0]
             ans[n][1] += t[1]
         ans[n][0] += ans[n][1] // 60
@@ -181,7 +181,7 @@ async def get_all_rank(after_date, before_date):
         length = min(len(tmp[n][0]), len(tmp[n][1]))
         ans[n].append(length)
         for i in range(length):
-            t = subtime(tmp[n][0][i], tmp[n][1][i])
+            t = magic.subtime(tmp[n][0][i], tmp[n][1][i])
             ans[n][0] += t[0]
             ans[n][1] += t[1]
         ans[n][0] += ans[n][1] // 60
@@ -244,7 +244,7 @@ async def on_message(message):
             await message.channel.send(f"**神聖なるカードは正位置へと戻った……この事件を忘れてはいけない。**")
             await bot_chan.remove_roles(cardkey_dead_role)
 
-        if (is_lost(user_said) and (card_2f_role.members != [])):
+        if (magic.is_lost(user_said) and (card_2f_role.members != [])):
             print(f"{card_2f_role.members[0]} lost")
             await card_2f_role.members[0].remove_roles(card_2f_role)
             await message.channel.send(f"**ピピピ……カードキーは *fix* コマンドが使用されるまで使用禁止になります。**")
