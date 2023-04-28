@@ -1,1 +1,1 @@
-worker: python src/role_chan.py
+worker: python src/main.py
