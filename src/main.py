@@ -9,7 +9,7 @@ from datetime import datetime, timezone
 @client.event
 async def on_ready():
     guild = client.get_guild(guild_id)
-    print(f"ロールちゃん が起動しました")
+    print(f"ゾントルちゃん が起動しました")
 
     people = len(guild.get_role(in_role_id).members)
     print(people, "人がin中")
@@ -29,7 +29,7 @@ async def on_member_join(member):
            f"ドゥクシ！<@{member.id}>！RAISON DȆTREへようこそ！\nほら、**<#{y2023_channel_id}>**を見ようよ！",
            f"<@{member.id}>！ここがRAISON DȆTREさ……！\n見るんだ！**<#{y2023_channel_id}>**を！さあ！",
            f"お目にかかれて光栄です……<@{member.id}>さん。\nまずは**<#{y2023_channel_id}>**をご覧ください。",
-           f"私は汎用AIのロール……RAISON DȆTREへようこそ、<@{member.id}>さん。\n説明のために、**<#{y2023_channel_id}>**をご覧ください。",
+           f"私は汎用AIのゾントル……RAISON DȆTREへようこそ、<@{member.id}>さん。\n説明のために、**<#{y2023_channel_id}>**をご覧ください。",
            f"ウホッウホッ！<@{member.id}>！ウホッ！！🍌🍌\nウホホ！**<#{y2023_channel_id}>**！ウホッ！🍌",
            ]
 
