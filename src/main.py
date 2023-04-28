@@ -1,10 +1,8 @@
-import os
 import math
 import magic
 from vars import *
 from random import randint
-from dotenv import load_dotenv
-from discord import Intents, Client, Game, Status
+from discord import Game, Status
 from datetime import datetime, timezone
 
 

@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from discord import Intents, Client, Game, Status
+from discord import Intents, Client
 
 load_dotenv()
 
@@ -38,5 +38,3 @@ takelike_words = {"take", "ｔａｋｅ", "たけ", "タケ", "ﾀｹ", "rake", 
 returnlike_words = {"return", "ｒｅｔｕｒｎ", "れつrn", "れつｒｎ", "teturn", "retune",
                     "returm", "returb", "リターン", "りたーん", "ﾘﾀｰﾝ", "列rn", "retrun", "retrn"}
 fixlike_words = {"fix", "fixed", "ふぃぇd", "ｆｉｘｅｄ", "ふぃぇｄ"}
-
-
