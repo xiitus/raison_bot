@@ -115,6 +115,7 @@ async def get_all_rank(after_date, before_date):
             person = message.author.id
             msg = message.content
             time = message.created_at.timestamp()
+            roles = message.author.roles
             if (msg.lower() in outlike_words):
                 if not (person in tmp):
                     names.add(person)
@@ -151,12 +152,13 @@ async def get_all_rank(after_date, before_date):
     print(ans2)
 
     channel = server.get_channel(bot_channel_id)
-    await channel.send(f"***Ranking of newby:\n{after_date.date()} ~ {before_date.date()}***")
+    await channel.send(f"***Ranking of all members:\n{after_date.date()} ~ {before_date.date()}***")
     i = 1
     for a in ans2:
         await channel.send(f"{i}位: <@{a[0]}> - ***{int(a[1][0])}h {int(a[1][1])}m*** (*in回数: **{a[1][2]}** 回*)\n")
         i += 1
     return ans2
+
 
 @ client.event
 async def on_message(message):
@@ -236,12 +238,12 @@ async def on_message(message):
     if (is_bot_channel):
         if (user_said == "newby_ranking_plz"):
             d1 = datetime(2023, 4, 9, tzinfo=timezone.utc)
-            d2 = datetime(2023, 4, 30, tzinfo=timezone.utc)
+            d2 = datetime(2023, 5, 3, tzinfo=timezone.utc)
             await get_newby_rank(after_date=d1, before_date=d2)
 
         if (user_said == "all_ranking_plz"):
             d1 = datetime(2023, 4, 9, tzinfo=timezone.utc)
-            d2 = datetime(2023, 4, 30, tzinfo=timezone.utc)
+            d2 = datetime(2023, 5, 3, tzinfo=timezone.utc)
             await get_all_rank(after_date=d1, before_date=d2)
 
         if (user_said == "get_in_data"):
