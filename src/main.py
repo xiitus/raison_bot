@@ -196,8 +196,8 @@ async def on_message(message):
         if (user_said in outlike_words) or (user_said[:-1] in outlike_words):
             await message.author.remove_roles(in_role)
 
-    # if (is_2f_cardkey_channel):
-    if (is_bot_channel):
+    if (is_2f_cardkey_channel):
+    # if (is_bot_channel):
         if (message.author.bot):
             return
 
