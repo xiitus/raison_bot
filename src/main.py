@@ -115,7 +115,6 @@ async def get_all_rank(after_date, before_date):
             person = message.author.id
             msg = message.content
             time = message.created_at.timestamp()
-            roles = message.author.roles
             if (msg.lower() in outlike_words):
                 if not (person in tmp):
                     names.add(person)
