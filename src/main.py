@@ -96,12 +96,10 @@ async def get_newby_rank(after_date, before_date):
 
     channel = server.get_channel(bot_channel_id)
     await channel.send(f"***Ranking of newby:\n{after_date.date()} ~ {before_date.date()}***")
-    words = []
+    i = 1
     for a in ans2:
-        words.append(
-            f"{i}位: <@{a[0]}> - ***{int(a[1][0])}h {int(a[1][1])}m*** (*in回数: **{a[1][2]}** 回*)\n")
+        await channel.send(f"{i}位: <@{a[0]}> - ***{int(a[1][0])}h {int(a[1][1])}m*** (*in回数: **{a[1][2]}** 回*)\n")
         i += 1
-    await channel.send("".join(words))
     return ans2
 
 
@@ -155,12 +153,9 @@ async def get_all_rank(after_date, before_date):
     channel = server.get_channel(bot_channel_id)
     await channel.send(f"***Ranking of all members:\n{after_date.date()} ~ {before_date.date()}***")
     i = 1
-    words = []
     for a in ans2:
-        words.append(
-            f"{i}位: <@{a[0]}> - ***{int(a[1][0])}h {int(a[1][1])}m*** (*in回数: **{a[1][2]}** 回*)\n")
+        await channel.send(f"{i}位: <@{a[0]}> - ***{int(a[1][0])}h {int(a[1][1])}m*** (*in回数: **{a[1][2]}** 回*)\n")
         i += 1
-    await channel.send("".join(words))
     return ans2
 
 
@@ -201,7 +196,7 @@ async def on_message(message):
             await message.author.remove_roles(in_role)
 
     if (is_2f_cardkey_channel):
-        # if (is_bot_channel):
+    # if (is_bot_channel):
         if (message.author.bot):
             return
 
