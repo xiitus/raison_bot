@@ -54,7 +54,7 @@ async def get_newby_rank(after_date, before_date):
 
     async for message in channel.history(limit=None):
         if (after_date.replace(tzinfo=timezone.utc) <= message.created_at.replace(tzinfo=timezone.utc) <= before_date.replace(tzinfo=timezone.utc)):
-            person = message.author.name
+            person = message.author.id
             msg = message.content
             time = message.created_at.timestamp()
             roles = message.author.roles
@@ -68,7 +68,7 @@ async def get_newby_rank(after_date, before_date):
 
     async for message in channel.history(limit=None):
         if (after_date.replace(tzinfo=timezone.utc) <= message.created_at.replace(tzinfo=timezone.utc) <= before_date.replace(tzinfo=timezone.utc)):
-            person = message.author.name
+            person = message.author.id
             msg = message.content
             time = message.created_at.timestamp()
             roles = message.author.roles
@@ -112,7 +112,7 @@ async def get_all_rank(after_date, before_date):
 
     async for message in channel.history(limit=None):
         if (after_date.replace(tzinfo=timezone.utc) <= message.created_at.replace(tzinfo=timezone.utc) <= before_date.replace(tzinfo=timezone.utc)):
-            person = message.author.name
+            person = message.author.id
             msg = message.content
             time = message.created_at.timestamp()
             if (msg.lower() in outlike_words):
@@ -125,7 +125,7 @@ async def get_all_rank(after_date, before_date):
 
     async for message in channel.history(limit=None):
         if (after_date.replace(tzinfo=timezone.utc) <= message.created_at.replace(tzinfo=timezone.utc) <= before_date.replace(tzinfo=timezone.utc)):
-            person = message.author.name
+            person = message.author.id
             msg = message.content
             time = message.created_at.timestamp()
             if (msg.lower() in inlike_words):
@@ -196,7 +196,7 @@ async def on_message(message):
             await message.author.remove_roles(in_role)
 
     if (is_2f_cardkey_channel):
-    # if (is_bot_channel):
+        # if (is_bot_channel):
         if (message.author.bot):
             return
 
