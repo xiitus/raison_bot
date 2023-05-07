@@ -54,7 +54,7 @@ async def get_newby_rank(after_date, before_date):
 
     async for message in channel.history(limit=None):
         if (after_date.replace(tzinfo=timezone.utc) <= message.created_at.replace(tzinfo=timezone.utc) <= before_date.replace(tzinfo=timezone.utc)):
-            person = message.author
+            person = message.author.id
             msg = message.content
             time = message.created_at.timestamp()
             roles = message.author.roles
@@ -68,7 +68,7 @@ async def get_newby_rank(after_date, before_date):
 
     async for message in channel.history(limit=None):
         if (after_date.replace(tzinfo=timezone.utc) <= message.created_at.replace(tzinfo=timezone.utc) <= before_date.replace(tzinfo=timezone.utc)):
-            person = message.author
+            person = message.author.id
             msg = message.content
             time = message.created_at.timestamp()
             roles = message.author.roles
@@ -98,7 +98,7 @@ async def get_newby_rank(after_date, before_date):
     await channel.send(f"***Ranking of newby:\n{after_date.date()} ~ {before_date.date()}***")
     i = 1
     for a in ans2:
-        await channel.send(f"{i}位: **{a[0]}** - ***{int(a[1][0])}h {int(a[1][1])}m*** (*in回数: **{a[1][2]}** 回*)\n")
+        await channel.send(f"{i}位: <@{a[0]}> - ***{int(a[1][0])}h {int(a[1][1])}m*** (*in回数: **{a[1][2]}** 回*)\n")
         i += 1
     return ans2
 
@@ -112,7 +112,7 @@ async def get_all_rank(after_date, before_date):
 
     async for message in channel.history(limit=None):
         if (after_date.replace(tzinfo=timezone.utc) <= message.created_at.replace(tzinfo=timezone.utc) <= before_date.replace(tzinfo=timezone.utc)):
-            person = message.author
+            person = message.author.id
             msg = message.content
             time = message.created_at.timestamp()
             if (msg.lower() in outlike_words):
@@ -125,7 +125,7 @@ async def get_all_rank(after_date, before_date):
 
     async for message in channel.history(limit=None):
         if (after_date.replace(tzinfo=timezone.utc) <= message.created_at.replace(tzinfo=timezone.utc) <= before_date.replace(tzinfo=timezone.utc)):
-            person = message.author
+            person = message.author.id
             msg = message.content
             time = message.created_at.timestamp()
             if (msg.lower() in inlike_words):
@@ -154,7 +154,7 @@ async def get_all_rank(after_date, before_date):
     await channel.send(f"***Ranking of all members:\n{after_date.date()} ~ {before_date.date()}***")
     i = 1
     for a in ans2:
-        await channel.send(f"{i}位: **{a[0]}** - ***{int(a[1][0])}h {int(a[1][1])}m*** (*in回数: **{a[1][2]}** 回*)\n")
+        await channel.send(f"{i}位: <@{a[0]}> - ***{int(a[1][0])}h {int(a[1][1])}m*** (*in回数: **{a[1][2]}** 回*)\n")
         i += 1
     return ans2
 
@@ -265,6 +265,7 @@ async def on_message(message):
             await message.channel.send(say)
 
     people = len(message.guild.get_role(in_role_id).members)
+    print(people, "人がin中")
     game = Game(f"{people}人が RAISON DÊTRE")
     await client.change_presence(status=Status.online, activity=game)
 
