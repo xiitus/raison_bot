@@ -196,7 +196,7 @@ async def on_message(message):
         if (user_said in outlike_words) or (user_said[:-1] in outlike_words):
             await message.author.remove_roles(in_role)
             if (len(guild.get_role(in_role_id).members) <= 1):
-                await message.author.send(f"**ピピピ……アジトを最後に出るときは消灯をお願いします。\n気をつけて帰ってね、未来のアーティスト!**")
+                await message.author.send(f"**ピピピ……アジトを最後に出るときはエアコン・照明を消していただくようにお願いします。\n気をつけて帰ってね、未来のアーティスト!**")
 
     if (is_2f_cardkey_channel):
         # if (is_bot_channel):
