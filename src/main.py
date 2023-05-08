@@ -167,11 +167,11 @@ async def on_message(message):
     is_2f_cardkey_channel = (message.channel.id == card_2f_channel_id)
     bot_chan = guild.get_member(1073911059066396672)
 
-    in_role = message.guild.get_role(in_role_id)
-    card_2f_role = message.guild.get_role(card_2f_role_id)
-    cardkey_dead_role = message.guild.get_role(cardkey_dead_role_id)
-    trial_joining_role = message.guild.get_role(trial_joining_role_id)
-    office_training_role = message.guild.get_role(office_training_role_id)
+    in_role = guild.get_role(in_role_id)
+    card_2f_role = guild.get_role(card_2f_role_id)
+    cardkey_dead_role = guild.get_role(cardkey_dead_role_id)
+    trial_joining_role = guild.get_role(trial_joining_role_id)
+    office_training_role = guild.get_role(office_training_role_id)
 
     card_is_dead = False
     if (cardkey_dead_role.members != []):
@@ -195,7 +195,7 @@ async def on_message(message):
 
         if (user_said in outlike_words) or (user_said[:-1] in outlike_words):
             await message.author.remove_roles(in_role)
-            if (len(message.guild.get_role(in_role_id).members) <= 1):
+            if (len(guild.get_role(in_role_id).members) <= 1):
                 await message.author.send(f"**ピピピ……アジトを最後に出るときは消灯をお願いします。\n気をつけて帰ってね、未来のアーティスト!**")
 
     if (is_2f_cardkey_channel):
@@ -249,7 +249,7 @@ async def on_message(message):
             await get_all_rank(after_date=d1, before_date=d2)
 
         if (user_said == "get_in_data"):
-            people = len(message.guild.get_role(in_role_id).members)
+            people = len(guild.get_role(in_role_id).members)
             messages = [f"**ガラ空き……ライバルをぶっちぎるチャンスだね! 世界を創る準備はできた?**",
                         f"**席にはまだまだ空きがあるよ! 競争の世界に、おいでおいで!**",
                         f"**いつもよりちょっぴりにぎやか! ライバルは今も生産してるぞ!**",
@@ -267,7 +267,7 @@ async def on_message(message):
             await message.channel.send(f"**現在のin人数は{people}人!**")
             await message.channel.send(say)
 
-    people = len(message.guild.get_role(in_role_id).members)
+    people = len(guild.get_role(in_role_id).members)
     print(people, "人がin中")
     game = Game(f"{people}人が RAISON DÊTRE")
     await client.change_presence(status=Status.online, activity=game)
