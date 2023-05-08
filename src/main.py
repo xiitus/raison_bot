@@ -183,8 +183,8 @@ async def on_message(message):
 
     user_said = message.content.lower()
 
-    # if (is_attendance_channel):
-    if (is_bot_channel):
+    if (is_attendance_channel):
+    # if (is_bot_channel):
         if (message.author.bot):
             return
 
