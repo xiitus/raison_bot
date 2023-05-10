@@ -167,7 +167,7 @@ async def on_message(message):
     is_2f_cardkey_channel = (message.channel.id == card_2f_channel_id)
     bot_chan = guild.get_member(1073911059066396672)
 
-    in_role = guild.get_role(in_role_id)
+    in_role = message.guild.get_role(in_role_id)
     card_2f_role = message.guild.get_role(card_2f_role_id)
     cardkey_dead_role = message.guild.get_role(cardkey_dead_role_id)
     trial_joining_role = message.guild.get_role(trial_joining_role_id)
@@ -184,7 +184,7 @@ async def on_message(message):
     user_said = message.content.lower()
 
     if (is_attendance_channel):
-    # if (is_bot_channel):
+        # if (is_bot_channel):
         if (message.author.bot):
             return
 
@@ -195,7 +195,7 @@ async def on_message(message):
 
         if (user_said in outlike_words) or (user_said[:-1] in outlike_words):
             await message.author.remove_roles(in_role)
-            if (len(guild.get_role(in_role_id).members) <= 1):
+            if (len(message.guild.get_role(in_role_id).members) <= 1):
                 await message.author.send(f"**アジトを最後に出るときは、エアコン・照明を消していただくようにお願いします。\n気をつけて帰ってね、未来のアーティスト!**")
 
     if (is_2f_cardkey_channel):
