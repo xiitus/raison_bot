@@ -168,10 +168,10 @@ async def on_message(message):
     bot_chan = guild.get_member(1073911059066396672)
 
     in_role = guild.get_role(in_role_id)
-    card_2f_role = guild.get_role(card_2f_role_id)
-    cardkey_dead_role = guild.get_role(cardkey_dead_role_id)
-    trial_joining_role = guild.get_role(trial_joining_role_id)
-    office_training_role = guild.get_role(office_training_role_id)
+    card_2f_role = message.guild.get_role(card_2f_role_id)
+    cardkey_dead_role = message.guild.get_role(cardkey_dead_role_id)
+    trial_joining_role = message.guild.get_role(trial_joining_role_id)
+    office_training_role = message.guild.get_role(office_training_role_id)
 
     card_is_dead = False
     if (cardkey_dead_role.members != []):
