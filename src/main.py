@@ -125,7 +125,7 @@ async def get_all_rank(after_date, before_date):
 
     async for message in channel.history(limit=None):
         if (after_date.replace(tzinfo=timezone.utc) <= message.created_at.replace(tzinfo=timezone.utc) <= before_date.replace(tzinfo=timezone.utc)):
-            person = message.author
+            person = message.author.name
             msg = message.content
             time = message.created_at.timestamp()
             if (msg.lower() in inlike_words):
@@ -270,7 +270,7 @@ async def on_message(message):
 
     people = len(guild.get_role(in_role_id).members)
     print(people, "人がin中")
-    game = Game(f"{people}人が RAISON DÊTRE")
+    game = Game(f"RAISON DÊTRE")
     await client.change_presence(status=Status.online, activity=game)
 
     return
