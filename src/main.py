@@ -154,7 +154,8 @@ async def get_all_rank(after_date, before_date):
     await channel.send(f"***Ranking of all members:\n{after_date.date()} ~ {before_date.date()}***")
     i = 1
     for a in ans2:
-        await channel.send(f"[{i}, <@{a[0]}>, {int(a[1][0])}h {int(a[1][1])}m, {a[1][2]}]\n")
+        # await channel.send(f'[{i}, "<@{a[0]}>", "{int(a[1][0])}h {int(a[1][1])}m", {a[1][2]}],\n')
+        print(f'[{i}, "<@{a[0]}>", "{int(a[1][0])}h {int(a[1][1])}m", {a[1][2]}],\n')
         i += 1
     return ans2
 
