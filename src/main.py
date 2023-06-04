@@ -125,7 +125,7 @@ async def get_all_rank(after_date, before_date):
 
     async for message in channel.history(limit=None):
         if (after_date.replace(tzinfo=timezone.utc) <= message.created_at.replace(tzinfo=timezone.utc) <= before_date.replace(tzinfo=timezone.utc)):
-            person = message.author.name
+            person = message.author.id
             msg = message.content
             time = message.created_at.timestamp()
             if (msg.lower() in inlike_words):
@@ -155,7 +155,7 @@ async def get_all_rank(after_date, before_date):
     i = 1
     for a in ans2:
         # await channel.send(f'[{i}, "<@{a[0]}>", "{int(a[1][0])}h {int(a[1][1])}m", {a[1][2]}],\n')
-        print(f'[{i}, "{a[0]}", "{int(a[1][0])}h {int(a[1][1])}m", {a[1][2]}],\n')
+        print(f'[{i}, "{a[0]}, "{int(a[1][0])}h {int(a[1][1])}m", {a[1][2]}],\n')
         i += 1
     return ans2
 
