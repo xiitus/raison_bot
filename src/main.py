@@ -24,13 +24,13 @@ async def on_member_join(member):
     await member.add_roles(newby_role)
     await member.add_roles(trial_joining_role)
 
-    lst = [f"ハーイ、<@{member.id}>！RAISON DȆTREへようこそ！\nまずは落ち着いて、**<#{y2023_channel_id}>**を確認してください……",
-           f"あなたなのね、<@{member.id}>！RAISON DȆTREへおいで……\nさっそく**<#{y2023_channel_id}>**をチェックしましょう！",
-           f"ドゥクシ！<@{member.id}>！RAISON DȆTREへようこそ！\nほら、**<#{y2023_channel_id}>**を見ようよ！",
-           f"<@{member.id}>！ここがRAISON DȆTREさ……！\n見るんだ！**<#{y2023_channel_id}>**を！さあ！",
-           f"お目にかかれて光栄です……<@{member.id}>さん。\nまずは**<#{y2023_channel_id}>**をご覧ください。",
-           f"私は汎用AIのゾントル……RAISON DȆTREへようこそ、<@{member.id}>さん。\n説明のために、**<#{y2023_channel_id}>**をご覧ください。",
-           f"ウホッウホッ！<@{member.id}>！ウホッ！！🍌🍌\nウホホ！**<#{y2023_channel_id}>**！ウホッ！🍌",
+    lst = [f"ハーイ、<@{member.id}>！RAISON DȆTREへようこそ！",
+           f"あなたなのね、<@{member.id}>！RAISON DȆTREへおいで……",
+           f"ドゥクシ！<@{member.id}>！RAISON DȆTREへようこそ！",
+           f"<@{member.id}>！ここがRAISON DȆTREさ……！",
+           f"お目にかかれて光栄です……<@{member.id}>さん。",
+           f"私は汎用AIのゾントル……RAISON DȆTREへようこそ、<@{member.id}>さん。",
+           f"ウホッウホッ！<@{member.id}>！ウホッ！！🍌🍌",
            ]
 
     for channel in client.get_all_channels():
